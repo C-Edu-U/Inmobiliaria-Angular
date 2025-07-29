@@ -1,0 +1,54 @@
+<div class="container py-4">
+  <h2>Editar Propiedad</h2>
+
+  <form (ngSubmit)="guardarCambios()" class="row g-3">
+    <div class="col-md-6">
+      <input [(ngModel)]="propiedad.titulo" name="titulo" class="form-control" placeholder="Título" required>
+    </div>
+    <div class="col-md-6">
+      <input [(ngModel)]="propiedad.direccion" name="direccion" class="form-control" placeholder="Dirección" required>
+    </div>
+    <div class="col-md-4">
+      <input [(ngModel)]="propiedad.precio" name="precio" type="number" class="form-control" placeholder="Precio" required>
+    </div>
+    <div class="col-md-4">
+      <select [(ngModel)]="propiedad.id_tipo" name="id_tipo" class="form-select" required>
+        <option [ngValue]="null" disabled>Tipo</option>
+        <option *ngFor="let tipo of tipos" [value]="tipo.id_tipo">{{ tipo.nombre_tipo }}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <input [(ngModel)]="propiedad.habitaciones" name="habitaciones" type="number" class="form-control" placeholder="Habitaciones">
+    </div>
+    <div class="col-md-12">
+      <textarea [(ngModel)]="propiedad.descripcion" name="descripcion" rows="3" class="form-control" placeholder="Descripción"></textarea>
+    </div>
+    <div class="col-12 text-end">
+      <button class="btn btn-primary me-2" type="submit">Guardar Cambios</button>
+      <button class="btn btn-danger" type="button" (click)="eliminarPropiedad()">Eliminar</button>
+    </div>
+  </form>
+
+  <hr class="my-4">
+
+  <h4>Imágenes</h4>
+  <div class="row mb-4">
+    <div class="col-md-4" *ngFor="let img of imagenes">
+      <img [src]="img.url" class="img-fluid border rounded mb-2" />
+      <p class="small">{{ img.descripcion }}</p>
+    </div>
+  </div>
+
+  <h5>Agregar nueva imagen</h5>
+  <div class="row g-2 mb-3">
+    <div class="col-md-6">
+      <input [(ngModel)]="nuevaImagen.url" name="url" class="form-control" placeholder="URL de imagen">
+    </div>
+    <div class="col-md-4">
+      <input [(ngModel)]="nuevaImagen.descripcion" name="descripcion" class="form-control" placeholder="Descripción">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success w-100" (click)="agregarImagen()">Subir</button>
+    </div>
+  </div>
+</div>

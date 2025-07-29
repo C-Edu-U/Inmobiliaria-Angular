@@ -1,3 +1,60 @@
-<h2>Panel de administración</h2>
-<p>Aquí podrás gestionar tus propiedades.</p>
-<a routerLink="/">Volver al inicio</a>
+<button class="btn btn-danger float-end" (click)="logout()">Cerrar sesión</button>
+
+<div class="container py-4">
+  <h2 class="mb-4">Panel de Administración</h2>
+
+  <!-- Formulario -->
+  <form (ngSubmit)="guardarPropiedad()" #formPropiedad="ngForm" class="mb-5">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <input name="titulo" [(ngModel)]="nuevaPropiedad.titulo" class="form-control" placeholder="Título" required>
+      </div>
+      <div class="col-md-6">
+        <input name="direccion" [(ngModel)]="nuevaPropiedad.direccion" class="form-control" placeholder="Dirección" required>
+      </div>
+      <div class="col-md-4">
+        <input name="precio" type="number" [(ngModel)]="nuevaPropiedad.precio" class="form-control" placeholder="Precio" required>
+      </div>
+      <div class="col-md-4">
+        <select name="id_tipo" [(ngModel)]="nuevaPropiedad.id_tipo" class="form-select" required>
+          <option [ngValue]="null" disabled>Tipo de propiedad</option>
+          <option *ngFor="let tipo of tipos" [value]="tipo.id_tipo">{{ tipo.nombre_tipo }}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input name="habitaciones" type="number" [(ngModel)]="nuevaPropiedad.habitaciones" class="form-control" placeholder="Habitaciones">
+      </div>
+      <div class="col-md-12">
+        <textarea name="descripcion" [(ngModel)]="nuevaPropiedad.descripcion" class="form-control" rows="3" placeholder="Descripción"></textarea>
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-success" type="submit">Guardar Propiedad</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Tabla de propiedades -->
+  <h4>Propiedades registradas</h4>
+  <table class="table table-bordered table-hover">
+
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of propiedades">
+        <td>{{ p.id_propiedad }}</td>
+        <td>{{ p.titulo }}</td>
+        <td>{{ p.nombre_tipo }}</td>
+        <td>{{ p.precio | currency:'USD' }}</td>    
+        <td>
+            <a [routerLink]="['/admin/editar', p.id_propiedad]" class="btn btn-sm btn-outline-primary">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
