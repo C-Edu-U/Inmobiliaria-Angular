@@ -1,4 +1,6 @@
-<div class="container py-4">
+<app-navbar></app-navbar>
+
+<div class="container py-4" *ngIf="propiedad">
   <h2>Editar Propiedad</h2>
 
   <form (ngSubmit)="guardarCambios()" class="row g-3">
@@ -33,9 +35,13 @@
 
   <h4>Imágenes</h4>
   <div class="row mb-4">
-    <div class="col-md-4" *ngFor="let img of imagenes">
+    <div class="col-md-4" *ngFor="let img of imagenes; let i = index">
       <img [src]="img.url" class="img-fluid border rounded mb-2" />
       <p class="small">{{ img.descripcion }}</p>
+      <div class="d-flex gap-2">
+        <button class="btn btn-sm btn-outline-warning" (click)="editarImagen(i)">Editar</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="eliminarImagen(img.id_imagen)">Eliminar</button>
+      </div>
     </div>
   </div>
 

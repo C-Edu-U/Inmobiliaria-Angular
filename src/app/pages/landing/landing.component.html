@@ -1,41 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" href="#">Inmobiliaria Virtual</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Acceder</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 
 <div class="container py-5">
   <header class="text-center mb-5">
-    <h1 class="display-4">Inmobiliaria Virtual</h1>
-    <p class="lead">Explora inmuebles disponibles para comprar o alquilar.</p>
-    <a routerLink="/login" class="btn btn-outline-primary">Acceso Administrador</a>
+    <h1 class="display-4">Inmuebles Disponibles</h1>
+    <p class="lead">Explora propiedades en venta o alquiler.</p>
   </header>
 
   <div class="row">
     <div class="col-md-4 mb-4" *ngFor="let inmueble of inmuebles">
-      <div class="card h-100 shadow-sm">
-        <img src="{{inmueble.imagen}}" class="card-img-top" alt="Inmueble">
+      <div class="card h-100 shadow-sm border-0">
+        <img [src]="inmueble.imagen || 'https://via.placeholder.com/400x250?text=Sin+imagen'" class="card-img-top"
+          alt="Imagen propiedad" style="object-fit: cover; height: 200px;" />
         <div class="card-body">
-          <h5 class="card-title">{{inmueble.titulo}}</h5>
-          <p class="card-text">{{inmueble.descripcion}}</p>
+          <h5 class="card-title">{{ inmueble.titulo }}</h5>
+          <p class="card-text">{{ inmueble.descripcion }}</p>
         </div>
-        <div class="card-footer">
-          <strong>{{inmueble.precio | currency:'USD'}}</strong>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <strong>{{ inmueble.precio | currency:'USD' }}</strong>
+          <a [routerLink]="['/propiedad', inmueble.id_propiedad]" class="btn btn-sm btn-outline-primary">
+            Ver detalles
+          </a>
         </div>
       </div>
     </div>

@@ -1,1 +1,34 @@
-<p>detalle-propiedad works!</p>
+<app-navbar></app-navbar>
+
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/">Inicio</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{ propiedad?.titulo }}
+    </li>
+  </ol>
+</nav>
+
+<div class="container py-5" *ngIf="propiedad">
+  <h2 class="mb-4">{{ propiedad.titulo }}</h2>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <p><strong>Precio:</strong> {{ propiedad.precio | currency:'USD' }}</p>
+      <p><strong>Dirección:</strong> {{ propiedad.direccion }}</p>
+      <p><strong>Tipo:</strong> {{ propiedad.nombre_tipo }}</p>
+      <p><strong>Habitaciones:</strong> {{ propiedad.habitaciones }}</p>
+      <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
+    </div>
+    <div class="col-md-6">
+      <div *ngFor="let img of imagenes" class="mb-3">
+        <img [src]="img.url" alt="Imagen propiedad" class="img-fluid rounded shadow-sm" />
+        <small class="d-block text-muted mt-1">{{ img.descripcion }}</small>
+      </div>
+    </div>
+  </div>
+
+  <a routerLink="/" class="btn btn-outline-secondary">← Volver al inicio</a>
+</div>

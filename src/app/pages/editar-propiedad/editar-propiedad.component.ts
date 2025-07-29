@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-editar-propiedad',
   standalone: true,
   templateUrl: './editar-propiedad.component.html',
   styleUrls: ['./editar-propiedad.component.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule]
+  imports: [CommonModule, HttpClientModule, FormsModule, RouterModule, NavbarComponent]
 })
 export class EditarPropiedadComponent {
   private route = inject(ActivatedRoute);
@@ -73,13 +74,50 @@ export class EditarPropiedadComponent {
 
     this.http.post('http://localhost:8000/upload_imagen.php', this.nuevaImagen).subscribe({
       next: () => {
-        this.imagenes.push({ ...this.nuevaImagen }); // añade visualmente
-        this.nuevaImagen = {}; // limpia campos
+        this.imagenes.push({ ...this.nuevaImagen });
+        this.nuevaImagen = {};
       },
       error: err => {
         console.error('Error al subir imagen', err);
         alert('No se pudo agregar la imagen');
       }
     });
+  }
+
+  eliminarImagen(id_imagen: number) {
+    if (!confirm('¿Eliminar esta imagen?')) return;
+
+    this.http.get(`http://localhost:8000/delete_imagen.php?id=${id_imagen}`).subscribe({
+      next: () => {
+        this.imagenes = this.imagenes.filter(img => img.id_imagen !== id_imagen);
+      },
+      error: err => {
+        console.error('Error al eliminar imagen', err);
+        alert('No se pudo eliminar la imagen');
+      }
+    });
+  }
+
+  editarImagen(index: number) {
+    const nuevaURL = prompt('Nueva URL de imagen:', this.imagenes[index].url);
+    const nuevaDesc = prompt('Nueva descripción:', this.imagenes[index].descripcion);
+
+    if (nuevaURL !== null && nuevaDesc !== null) {
+      const imagen = this.imagenes[index];
+      this.http.post('http://localhost:8000/update_imagen.php', {
+        id_imagen: imagen.id_imagen,
+        url: nuevaURL,
+        descripcion: nuevaDesc
+      }).subscribe({
+        next: () => {
+          imagen.url = nuevaURL;
+          imagen.descripcion = nuevaDesc;
+        },
+        error: err => {
+          console.error('Error al editar imagen', err);
+          alert('No se pudo actualizar la imagen');
+        }
+      });
+    }
   }
 }

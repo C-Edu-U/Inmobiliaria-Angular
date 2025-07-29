@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Inmobiliaria</a>
+
+    <ul class="navbar-nav ms-auto">
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin">Panel Admin</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link nav-link" (click)="logout()">Cerrar sesión</button>
+        </li>
+      </ng-container>
+      <ng-template #loggedOut>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

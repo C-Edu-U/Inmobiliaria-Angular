@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule]
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule, NavbarComponent]
 })
 export class AdminComponent {
   http = inject(HttpClient);
@@ -17,18 +18,21 @@ export class AdminComponent {
   tipos: any[] = [];
   nuevaPropiedad: any = {};
 
+  private isBrowser = typeof window !== 'undefined';
+
   ngOnInit() {
-    const usuario = localStorage.getItem('usuario');
-    if (!usuario) {
-      alert('Debes iniciar sesión');
-      window.location.href = '/login';
-      return;
+    if (this.isBrowser) {
+      const usuario = localStorage.getItem('usuario');
+      if (!usuario) {
+        alert('Debes iniciar sesión');
+        window.location.href = '/login';
+        return;
+      }
+
+      this.cargarTipos();
+      this.cargarPropiedades();
     }
-
-    this.cargarTipos();
-    this.cargarPropiedades();
   }
-
 
   cargarTipos() {
     this.http.get<any[]>('http://localhost:8000/get_tipos.php')
@@ -57,8 +61,9 @@ export class AdminComponent {
   }
 
   logout() {
-    localStorage.removeItem('usuario');
-    window.location.href = '/login';
+    if (this.isBrowser) {
+      localStorage.removeItem('usuario');
+      window.location.href = '/login';
+    }
   }
-
 }
