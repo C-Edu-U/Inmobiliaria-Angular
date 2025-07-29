@@ -1,0 +1,25 @@
+.navbar {
+  background-color: var(--color-bg);
+  padding: 16px 24px;
+  font-family: var(--font-base);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links li a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-links li a:hover {
+  color: var(--color-accent);
+}

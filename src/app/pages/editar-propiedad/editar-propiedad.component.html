@@ -1,60 +1,68 @@
 <app-navbar></app-navbar>
 
-<div class="container py-4" *ngIf="propiedad">
-  <h2>Editar Propiedad</h2>
+<nav aria-label="breadcrumb" class="bg-light py-2 px-4 mb-4 rounded shadow-sm">
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-item"><a routerLink="/admin">Panel Admin</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Propiedad</li>
+  </ol>
+</nav>
 
-  <form (ngSubmit)="guardarCambios()" class="row g-3">
+<div class="container py-4" *ngIf="propiedad">
+  <h2 class="heading-lg mb-4">Editar Propiedad</h2>
+
+  <form (ngSubmit)="guardarCambios()" class="row g-3 bg-white p-4 rounded shadow-sm">
     <div class="col-md-6">
-      <input [(ngModel)]="propiedad.titulo" name="titulo" class="form-control" placeholder="Título" required>
+      <input [(ngModel)]="propiedad.titulo" name="titulo" class="form-control input" placeholder="Título" required>
     </div>
     <div class="col-md-6">
-      <input [(ngModel)]="propiedad.direccion" name="direccion" class="form-control" placeholder="Dirección" required>
+      <input [(ngModel)]="propiedad.direccion" name="direccion" class="form-control input" placeholder="Dirección" required>
     </div>
     <div class="col-md-4">
-      <input [(ngModel)]="propiedad.precio" name="precio" type="number" class="form-control" placeholder="Precio" required>
+      <input [(ngModel)]="propiedad.precio" name="precio" type="number" class="form-control input" placeholder="Precio" required>
     </div>
     <div class="col-md-4">
-      <select [(ngModel)]="propiedad.id_tipo" name="id_tipo" class="form-select" required>
+      <select [(ngModel)]="propiedad.id_tipo" name="id_tipo" class="form-select input" required>
         <option [ngValue]="null" disabled>Tipo</option>
         <option *ngFor="let tipo of tipos" [value]="tipo.id_tipo">{{ tipo.nombre_tipo }}</option>
       </select>
     </div>
     <div class="col-md-4">
-      <input [(ngModel)]="propiedad.habitaciones" name="habitaciones" type="number" class="form-control" placeholder="Habitaciones">
+      <input [(ngModel)]="propiedad.habitaciones" name="habitaciones" type="number" class="form-control input" placeholder="Habitaciones">
     </div>
     <div class="col-md-12">
-      <textarea [(ngModel)]="propiedad.descripcion" name="descripcion" rows="3" class="form-control" placeholder="Descripción"></textarea>
+      <textarea [(ngModel)]="propiedad.descripcion" name="descripcion" rows="4" class="form-control input" placeholder="Descripción"></textarea>
     </div>
     <div class="col-12 text-end">
-      <button class="btn btn-primary me-2" type="submit">Guardar Cambios</button>
-      <button class="btn btn-danger" type="button" (click)="eliminarPropiedad()">Eliminar</button>
+      <button class="btn btn-primary me-2" type="submit">💾 Guardar Cambios</button>
+      <button class="btn btn-danger" type="button" (click)="eliminarPropiedad()">🗑 Eliminar</button>
     </div>
   </form>
 
-  <hr class="my-4">
+  <hr class="my-5">
 
-  <h4>Imágenes</h4>
-  <div class="row mb-4">
+  <h4 class="heading-sm mb-3">Imágenes Actuales</h4>
+  <div class="row mb-5">
     <div class="col-md-4" *ngFor="let img of imagenes; let i = index">
-      <img [src]="img.url" class="img-fluid border rounded mb-2" />
-      <p class="small">{{ img.descripcion }}</p>
+      <img [src]="img.url" class="img-fluid border rounded shadow-sm mb-2" />
+      <p class="text-sm">{{ img.descripcion }}</p>
       <div class="d-flex gap-2">
-        <button class="btn btn-sm btn-outline-warning" (click)="editarImagen(i)">Editar</button>
-        <button class="btn btn-sm btn-outline-danger" (click)="eliminarImagen(img.id_imagen)">Eliminar</button>
+        <button class="btn btn-sm btn-outline-warning" (click)="editarImagen(i)">✏️ Editar</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="eliminarImagen(img.id_imagen)">🗑 Eliminar</button>
       </div>
     </div>
   </div>
 
-  <h5>Agregar nueva imagen</h5>
-  <div class="row g-2 mb-3">
+  <h5 class="heading-sm mb-3">Agregar Nueva Imagen</h5>
+  <div class="row g-2 align-items-end">
     <div class="col-md-6">
-      <input [(ngModel)]="nuevaImagen.url" name="url" class="form-control" placeholder="URL de imagen">
+      <input [(ngModel)]="nuevaImagen.url" name="url" class="form-control input" placeholder="URL de imagen">
     </div>
     <div class="col-md-4">
-      <input [(ngModel)]="nuevaImagen.descripcion" name="descripcion" class="form-control" placeholder="Descripción">
+      <input [(ngModel)]="nuevaImagen.descripcion" name="descripcion" class="form-control input" placeholder="Descripción">
     </div>
     <div class="col-md-2">
-      <button class="btn btn-success w-100" (click)="agregarImagen()">Subir</button>
+      <button class="btn btn-success w-100" (click)="agregarImagen()">➕ Subir</button>
     </div>
   </div>
 </div>

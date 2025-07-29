@@ -1,34 +1,49 @@
 <app-navbar></app-navbar>
 
-<nav aria-label="breadcrumb" class="mb-4">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a routerLink="/">Inicio</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-      {{ propiedad?.titulo }}
-    </li>
-  </ol>
+<nav aria-label="breadcrumb" class="breadcrumb-container mb-4">
+  <div class="container">
+    <ol class="breadcrumb bg-transparent px-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ propiedad?.titulo }}
+      </li>
+    </ol>
+  </div>
 </nav>
 
 <div class="container py-5" *ngIf="propiedad">
-  <h2 class="mb-4">{{ propiedad.titulo }}</h2>
+  <h2 class="heading-lg mb-4">{{ propiedad.titulo }}</h2>
 
-  <div class="row mb-4">
+  <div class="row gx-5 gy-4">
+    <!-- Info General -->
     <div class="col-md-6">
-      <p><strong>Precio:</strong> {{ propiedad.precio | currency:'USD' }}</p>
-      <p><strong>Dirección:</strong> {{ propiedad.direccion }}</p>
-      <p><strong>Tipo:</strong> {{ propiedad.nombre_tipo }}</p>
-      <p><strong>Habitaciones:</strong> {{ propiedad.habitaciones }}</p>
-      <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
+      <ul class="list-unstyled text-base">
+        <li class="mb-3"><strong class="text-secondary">💰 Precio:</strong>
+          <span class="price-tag">{{ propiedad.precio | currency:'USD' }}</span>
+        </li>
+        <li class="mb-3"><strong class="text-secondary">📍 Dirección:</strong> {{ propiedad.direccion }}</li>
+        <li class="mb-3"><strong class="text-secondary">🏷️ Tipo:</strong> {{ propiedad.nombre_tipo }}</li>
+        <li class="mb-3"><strong class="text-secondary">🛏️ Habitaciones:</strong> {{ propiedad.habitaciones }}</li>
+        <li class="mb-3"><strong class="text-secondary">📝 Descripción:</strong> {{ propiedad.descripcion }}</li>
+      </ul>
     </div>
+
+    <!-- Galería -->
     <div class="col-md-6">
-      <div *ngFor="let img of imagenes" class="mb-3">
-        <img [src]="img.url" alt="Imagen propiedad" class="img-fluid rounded shadow-sm" />
-        <small class="d-block text-muted mt-1">{{ img.descripcion }}</small>
+      <div class="row g-3">
+        <div class="col-12" *ngFor="let img of imagenes">
+          <div class="image-card rounded shadow-sm overflow-hidden">
+            <img [src]="img.url" alt="Imagen propiedad" class="img-fluid w-100" />
+            <small class="d-block text-sm text-secondary px-2 py-1">{{ img.descripcion }}</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <a routerLink="/" class="btn btn-outline-secondary">← Volver al inicio</a>
+  <div class="mt-5">
+    <a routerLink="/" class="btn btn-outline-primary">← Volver al inicio</a>
+  </div>
 </div>

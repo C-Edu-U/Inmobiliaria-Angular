@@ -1,0 +1,37 @@
+.heading-lg {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.text-base {
+  font-size: 16px;
+  font-family: var(--font-base);
+  color: var(--color-text);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.price-tag {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.image-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(27, 42, 65, 0.1);
+  transition: transform 0.2s ease;
+}
+.image-card:hover {
+  transform: scale(1.01);
+}
+
+.breadcrumb-container {
+  background-color: var(--color-bg);
+  padding-top: 16px;
+}

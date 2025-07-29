@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #1B2A41;
+  --color-accent: #D97A2B;
+  --color-bg: #F5F7FA;
+  --color-secondary: #A0A4B8;
+  --color-success: #6B8E23;
+  --color-text: #1C1C1C;
+
+  --font-base: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-caption: 'Open Sans', sans-serif;
+
+  --container-width: 1200px;
+  --spacing-unit: 4px;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+.heading-xl { font-size: 36px; }
+.heading-lg { font-size: 28px; }
+.heading-md { font-size: 24px; }
+.heading-sm { font-size: 20px; }
+
+.text-base { font-size: 16px; }
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #b35f20;
+  box-shadow: 0 0 10px rgba(217, 122, 43, 0.3);
+}
+
+.input {
+  border: 1px solid var(--color-secondary);
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  width: 100%;
+  font-family: var(--font-base);
+}
+.input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(27, 42, 65, 0.1);
+}
