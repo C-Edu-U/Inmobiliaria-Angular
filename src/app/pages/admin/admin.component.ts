@@ -16,7 +16,7 @@ export class AdminComponent {
   http = inject(HttpClient);
   propiedades: any[] = [];
   tipos: any[] = [];
-  nuevaPropiedad: any = {};
+  nuevaPropiedad: any = { disponible: 1 };
 
   private isBrowser = typeof window !== 'undefined';
 
@@ -45,12 +45,15 @@ export class AdminComponent {
   }
 
   guardarPropiedad() {
-    console.log(this.nuevaPropiedad);
+    if (this.nuevaPropiedad.disponible === undefined) {
+      this.nuevaPropiedad.disponible = 1; // por defecto disponible
+    }
+
     this.http.post('http://localhost:8000/create_propiedad.php', this.nuevaPropiedad)
       .subscribe({
         next: () => {
           alert('Propiedad guardada correctamente');
-          this.nuevaPropiedad = {};
+          this.nuevaPropiedad = { disponible: 1 };
           this.cargarPropiedades();
         },
         error: (err) => {

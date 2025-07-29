@@ -30,6 +30,12 @@
     <div class="col-md-4">
       <input [(ngModel)]="propiedad.habitaciones" name="habitaciones" type="number" class="form-control input" placeholder="Habitaciones">
     </div>
+    <div class="col-md-4">
+      <select [(ngModel)]="propiedad.disponible" name="disponible" class="form-select input" required>
+        <option [value]="1">Disponible</option>
+        <option [value]="0">Deshabilitada</option>
+      </select>
+    </div>
     <div class="col-md-12">
       <textarea [(ngModel)]="propiedad.descripcion" name="descripcion" rows="4" class="form-control input" placeholder="Descripción"></textarea>
     </div>
